@@ -4,23 +4,26 @@ import PostListPage from "./pages/PostListPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import DefaultLayouts from "./layouts/DefaultLayouts";
 import PostDetailPage from "./pages/PostDetailPage";
+import { PostsProvider } from "./contexts/PostsContext";
 
 export default function App() {
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<DefaultLayouts />}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/about" element={<AboutUsPage />} />
+      <PostsProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<DefaultLayouts />}>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/about" element={<AboutUsPage />} />
 
-            <Route path="/post">
-              <Route path="" element={<PostListPage />} />
-              <Route path=":id" element={<PostDetailPage />} />
+              <Route path="/post">
+                <Route path="" element={<PostListPage />} />
+                <Route path=":id" element={<PostDetailPage />} />
+              </Route>
             </Route>
-          </Route>
-        </Routes>
-      </BrowserRouter>
+          </Routes>
+        </BrowserRouter>
+      </PostsProvider>
     </>
   );
 }
